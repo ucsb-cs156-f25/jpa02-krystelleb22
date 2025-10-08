@@ -19,8 +19,79 @@ public class TeamTest {
        assert(team.getName().equals("test-team"));
     }
 
-   
-    // TODO: Add additional tests as needed to get to 100% jacoco line coverage, and
+    @Test
+    public void toString_returns_correct_string() {
+        assertEquals("Team(name=test-team, members=[])", team.toString());
+    }
+
+
+    //Case 1: same object
+    @Test
+    public void teamEqual_same() {
+       
+        assert(team.equals(team));
+    }
+
+     //Case 2: different object
+    @Test
+    public void teamEqual_different() {
+        Team t = new Team("f25-xx");
+        t.addMember("Alice");
+        t.addMember("Bob");
+        t.addMember("Chris G.");
+        t.addMember("Danny");
+        t.addMember("Eve");
+        t.addMember("Frances");
+
+         assertEquals(false, team.equals(t));
+    }
+
+    //Case 3: same name and members
+    @Test
+    public void teamEqual_compareFields() {
+        Team t = new Team("test-team");   
+        assert(team.equals(t));
+    }
+
+    //Case 3: same name and different members
+    @Test
+    public void teamEqual_compareFields_sameName_diffMembers() {
+        Team t2 = new Team("test-team");    
+        t2.addMember("Alice");
+        t2.addMember("Bob");
+        t2.addMember("Chris G.");
+        t2.addMember("Danny");
+        t2.addMember("Eve");
+        t2.addMember("Frances");
+
+         assertEquals(false, team.equals(t2));
+    }
+
+     //Case 3: different name and same members
+    @Test
+    public void teamEqual_compareFields_diffName_sameMembers() {
+        Team t2 = new Team("f25-xx");    
+
+        assertEquals(false, team.equals(t2));
+    }
+
+    //Case 3: different name and different members
+    @Test
+    public void teamEqual_compareFields_diffName_diffMembers() {
+        Team t2 = new Team("f25-xx");    
+        t2.addMember("Alice");
+        t2.addMember("Bob");
+        t2.addMember("Chris G.");
+        t2.addMember("Danny");
+        t2.addMember("Eve");
+        t2.addMember("Frances");
+
+         assertEquals(false, team.equals(t2));
+    }
+
+
+
+    // // TODO: Add additional tests as needed to get to 100% jacoco line coverage, and
     // 100% mutation coverage (all mutants timed out or killed)
 
 }
