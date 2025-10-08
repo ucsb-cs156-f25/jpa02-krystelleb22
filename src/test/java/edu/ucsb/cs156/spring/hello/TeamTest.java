@@ -44,6 +44,9 @@ public class TeamTest {
         t.addMember("Frances");
 
          assertEquals(false, team.equals(t));
+         assertEquals(false, team.equals("Not a team"));
+         assertEquals(false, team.equals(1));
+         
     }
 
     //Case 3: same name and members
@@ -90,14 +93,23 @@ public class TeamTest {
     }
 
     @Test
-    public void team_hashCode(){
+    public void team_hashCode_equal(){
+        // instantiate t as a Team object
+int result = team.hashCode();
+int expectedResult = -1226298695;
+assertEquals(expectedResult, result);
+
+    }
+
+    @Test
+    public void team_hashCode_different(){
         Team t1 = new Team();
-        t1.setName("foo");
-        t1.addMember("bar");
+        t1.setName("Alice");
+        t1.addMember("Bob");
         Team t2 = new Team();
-        t2.setName("foo");
-        t2.addMember("bar");
-        assertEquals(t1.hashCode(), t2.hashCode());
+        t2.setName("Alice");
+        t2.addMember("Chris G.");
+        assert(!(t1.hashCode() == t2.hashCode()));
     }
 
 
